@@ -45,8 +45,11 @@ export class UserForm extends Component {
     this.rootRef.child(idGenerate).set({
         ...this.state,id:idGenerate,date:new Date().toLocaleDateString(), time:time
     }    
-    )
-    alert("data added")
+    ).then(()=>{
+      alert("Note is added in database")
+    }).catch(err=>{
+      alert(err)
+    })
     this.reset()
    }
 };
@@ -91,7 +94,7 @@ export class UserForm extends Component {
           </Button>
         </form>
         <div className="bg-dark">
-          <h4 className="text-white">NOTES DETAILS</h4>
+          <h4 className="text-white m-3">NOTES DETAILS</h4>
           <textarea  id="outlined-basic"
             className="m-2"
             onChange={this.handleChange}

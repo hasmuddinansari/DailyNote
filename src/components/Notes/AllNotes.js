@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {updateState} from "../REDUX/Action"
+import {updateState} from "../../REDUX/Action"
 import {connect} from "react-redux"
 import 'firebase/database'
 import firebase from "firebase"
@@ -27,9 +27,6 @@ export class AllNotes extends Component {
         if (confirmation == 1) {
         return this.rootRef.child(id).remove();
         }
-        else{
-            alert("You type wrong")
-        }
     }
     render() {
         const {notes} = this.props
@@ -38,7 +35,7 @@ export class AllNotes extends Component {
             <div className="container ">
                 <div className="row p-2">
                 {notes && notes.map(note=>{
-                return <NotesCard deleteItem={this.deleteItem}  id={note.id} note={note}/>
+                return <NotesCard match={this.props} deleteItem={this.deleteItem}  id={note.id} note={note}/>
                 })}
                 {/* <NotesCard/> */}
                 </div>
