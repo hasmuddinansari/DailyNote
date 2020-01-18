@@ -4,9 +4,6 @@ import {connect} from "react-redux"
 import 'firebase/database'
 import firebase from "firebase"
 import NotesCard from './NotesCard'
-
-
-
 export class AllNotes extends Component {
     constructor(props){
         super(props)
@@ -35,7 +32,7 @@ export class AllNotes extends Component {
             <div className="container ">
                 <div className="row p-2">
                 {notes && notes.map(note=>{
-                return <NotesCard match={this.props} deleteItem={this.deleteItem}  id={note.id} note={note}/>
+                return <NotesCard key={note.id} match={this.props} deleteItem={this.deleteItem}  id={note.id} note={note}/>
                 })}
                 {/* <NotesCard/> */}
                 </div>

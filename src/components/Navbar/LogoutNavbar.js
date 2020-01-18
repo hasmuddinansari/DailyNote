@@ -16,7 +16,8 @@ export class LogoutNavbar extends Component{
 
     logout = ()=>{
         this.auth.ref("auth").set({
-            authenticated:false
+            authenticated:false,
+            email:"",
         })
     }
     render(){
