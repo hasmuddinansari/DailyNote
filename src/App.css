@@ -1,0 +1,16 @@
+.bg-change {
+  background:url('/images/addBack.jpg') no-repeat;
+  background-size: cover;
+}
+.shdw {
+  box-shadow: 3px 0px 8px grey;
+}
+.mouseHover:hover{
+  cursor: pointer;
+  transform: scale(1.5);
+  transition: 0.3s;
+}
+.mouseHover{
+  transform: scale(1.3);
+  margin:3px;
+}
