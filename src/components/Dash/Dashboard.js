@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import {changeEmail,updateState} from "../../REDUX/Action"
 import firebase from 'firebase'
 import 'firebase/database'
+// import Perfomance from "./Perfomance"
 
 export class Dashboard extends Component {
     constructor(props){
@@ -63,14 +64,15 @@ export class Dashboard extends Component {
         const {notes} = this.props
         if(this.state.authenticated){
             return <h1>
-                Working
+                {/*  */}
+                Hello User !
             </h1>
         }
         else {
             return (
-                <div>
-                   <h1>
-                       Welcome {}
+                <div className="bg-home p-5 text-center">
+                   <h1 className="text-white">
+                       Welcome 
                     </h1> 
                 </div>
             )

@@ -33,3 +33,11 @@
 body{
   background:lightyellow
 }
+.bg-home {
+  max-height:100vh;
+  height:60vh;
+  width:100wh;
+  background: url("/images/homebg.gif") no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}

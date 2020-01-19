@@ -2,22 +2,33 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import firebase from 'firebase'
 import 'firebase/database'
+import {connect} from "react-redux"
 const style = {
     textDecoration:"none",
     fontFamily:"Courier New",
     color:"white"
 }
 
-export class LogoutNavbar extends Component{
+class LogoutNavbar extends Component{
     constructor(props){
         super(props)
         this.auth = firebase.database()
+        this.email =""
     }
 
     logout = ()=>{
         this.auth.ref("auth").set({
             authenticated:false,
             email:"",
+        })
+    }
+    componentDidMount(){
+        this.auth.ref("auth").orderByKey().on("value",snapshot=>{
+            const email = snapshot.val().email
+            this.setState({
+                ...this.state,
+                email:email
+            })
         })
     }
     render(){
@@ -31,7 +42,7 @@ export class LogoutNavbar extends Component{
             <Link className="text-white" style={style} to="/note">All Notes</Link>
             </button>
                 <h4 className="bg-info mouseHover mx-2 p-1 mt-1 text-dark rounded-circle" data-toggle="collapse" href="#logout" role="button" aria-expanded="false" aria-controls="logout">
-                    AS
+                   MD
                 </h4>
             <button onClick={this.logout} className="btn collapse btn-danger mx-2" id="logout">
                 Logout
@@ -41,4 +52,9 @@ export class LogoutNavbar extends Component{
     )
 }
 }
-export default LogoutNavbar
+const mapStateToProps = state =>{
+    return {
+        email:state.email
+    }
+}
+export default connect(mapStateToProps)(LogoutNavbar)
