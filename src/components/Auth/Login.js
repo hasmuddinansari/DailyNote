@@ -2,25 +2,40 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import firebase from "firebase"
 import 'firebase/database'
+import {connect} from "react-redux"
+import {changeEmail} from "../../REDUX/Action"
 import {Link} from "react-router-dom"
+import {Route, Redirect} from "react-router-dom"
 
 export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
         email: "",
-        password: ""
+        password: "",
+        authenticated:""
       }
       this.database = firebase.database()
       this.users = this.database.ref("users")
       this.olderUser=[]
       
   }
+  //if usern is already authenticated the user should be land on dashboard
+  componentWillMount(){
+    this.database.ref("auth").orderByKey().on("value", snap=>{
+        let temp = snap.val()
+        this.setState({
+            authenticated:temp.authenticated
+        })
+    })
+}
   handleChange = e => {
     this.setState({
+        ...this.state,
         [e.target.name]: e.target.value
     });
   };
+
   submit = (e) => {
       e.preventDefault()
       const {email, password}= this.state
@@ -52,6 +67,19 @@ export class Login extends Component {
   };
 
   render() {
+    //already logged in then redirect to homepage..else login page.
+    if(this.state.authenticated){
+      return <Route render={(props)=>{
+        return <Redirect
+        to={{
+        pathname: "/",
+        state: {
+          from: props.location
+        }
+      }}
+    />
+      }}/>
+    }
     return (
       <div className="container d-flex justify-content-center align-items-center p-5">
         <form onSubmit={this.submit} className="flex-column col-md-5 col-12 bg-light  border p-2 d-flex">
@@ -84,4 +112,10 @@ export class Login extends Component {
   }
 }
 
-export default Login;
+const mapDisToPro = dispatch =>{
+  return {
+    changeEmail:(email)=>dispatch(changeEmail(email))
+  }
+}
+
+export default connect(null, mapDisToPro)(Login);

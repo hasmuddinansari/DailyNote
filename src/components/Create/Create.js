@@ -3,12 +3,14 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import firebase from 'firebase'
 import 'firebase/database'
-import fbConfig from "./Config/fbConfig"
+import fbConfig from "../../Config/fbConfig"
+import {changeEmail} from "../../REDUX/Action"
+import {connect} from "react-redux"
 
 //initilizing config 
 firebase.initializeApp(fbConfig);
 firebase.analytics();
-export class UserForm extends Component {
+export class Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,6 +18,7 @@ export class UserForm extends Component {
               disc: "",
               about: "",
               username:"",
+              email:""
       }
       this.database = firebase.database()
       this.rootRef = this.database.ref('notes')
@@ -26,7 +29,29 @@ export class UserForm extends Component {
           username:"Ayaan",
     });
   };
-  
+  //as per email change path of ref of database to hanldle individualy dataa.
+  componentWillMount(){
+          document.title = "Create Notes"
+          this.database.ref('auth').orderByKey().on('value', snapshot=>{
+              let auth = snapshot.val()
+              let newEmail =""
+              for(let i=0; i < auth.email.length; i++){
+                  if(auth.email[i]=="@"){
+                    newEmail += "AT"
+                  }
+                  else if(auth.email[i]=="."){
+                    newEmail += "dot"
+                  }
+                  else{
+                    newEmail += auth.email[i]
+                  }
+              }
+              this.setState({
+                email:newEmail
+              })
+              this.props.changeEmail(newEmail)
+            })
+  }
   submit = () => {
     console.log(this.state);
 
@@ -42,7 +67,7 @@ export class UserForm extends Component {
     let hour = date.getHours()
     let min = date.getMinutes()
     let time = `${hour}:${min}`
-    this.rootRef.child(idGenerate).set({
+    this.rootRef.child(this.state.email).child(idGenerate).set({
         ...this.state,id:idGenerate,date:new Date().toLocaleDateString(), time:time
     }    
     ).then(()=>{
@@ -108,5 +133,9 @@ export class UserForm extends Component {
     );
   }
 }
-
-export default UserForm;
+const mapDisToPro = (dispatch)=>{
+  return {
+    changeEmail:email=>dispatch(changeEmail(email))
+  }
+}
+export default connect(null, mapDisToPro)(Create);

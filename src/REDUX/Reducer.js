@@ -1,16 +1,20 @@
 const initialState = {
-    notes:[]
+    notes:[],
+    email:"",
 }
 const reducer = (state=initialState, action)=>{
         switch(action.type){
-            case "ADD_NOTE":
+            case "CHANGE_EMAIL":
                 return {
-                    notes:[...state.notes, action.note]
+                    ...state,
+                    email:action.email,
                 }
             case "UPDATE":
                 return {
+                    ...state,
                     notes:[...action.payload]
                 }
+            
             default: return state
         }
 }

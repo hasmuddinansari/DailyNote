@@ -1,6 +1,7 @@
-export const addNote = (note)=> {
-    return (dispatch)=>{
-            dispatch({type:"ADD_NOTE", note})  
+export const changeEmail = (email)=> {
+    return {
+        type:"CHANGE_EMAIL",
+        email:email
     }
 }
 
