@@ -20,6 +20,8 @@ class LogoutNavbar extends Component{
         this.auth.ref("auth").set({
             authenticated:false,
             email:"",
+            name:"",
+            username:""
         })
     }
     componentDidMount(){

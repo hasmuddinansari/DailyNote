@@ -125,7 +125,7 @@ export class Create extends Component {
             onChange={this.handleChange}
             name="about"
             label="About"
-            placeholder="Details of notes......."
+            placeholder="Brief explaination about your note.."
             value={this.state.about}  style={{height: "calc(16em + 4.75rem + 6px)", width:"35rem"}}></textarea>
         </div>
       </div>

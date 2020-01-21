@@ -1,7 +1,9 @@
-export const changeEmail = (email)=> {
+export const changeEmail = (email,name,username)=> {
     return {
         type:"CHANGE_EMAIL",
-        email:email
+        email:email,
+        name:name,
+        username:username
     }
 }
 

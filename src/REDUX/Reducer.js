@@ -1,6 +1,8 @@
 const initialState = {
     notes:[],
     email:"",
+    name:"",
+    username:""
 }
 const reducer = (state=initialState, action)=>{
         switch(action.type){
@@ -8,6 +10,8 @@ const reducer = (state=initialState, action)=>{
                 return {
                     ...state,
                     email:action.email,
+                    name:action.name,
+                    username:action.username
                 }
             case "UPDATE":
                 return {

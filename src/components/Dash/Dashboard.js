@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import {changeEmail,updateState} from "../../REDUX/Action"
 import firebase from 'firebase'
 import 'firebase/database'
+
 // import Perfomance from "./Perfomance"
 
 export class Dashboard extends Component {
@@ -13,7 +14,10 @@ export class Dashboard extends Component {
         this.state={
             data:[],
             authenticated:'',
-            email:""
+            email:"",
+            name:"",
+            username:"",
+            wish:""
         }
     }
     componentDidMount(){
@@ -48,9 +52,9 @@ export class Dashboard extends Component {
             this.setState({
                 ...this.state,
                 authenticated:auth.authenticated,
-                email:newEmail
+                email:newEmail,
             })
-            this.props.changeEmail(newEmail)
+            this.props.changeEmail(newEmail, auth.name, auth.username)
             }
 
             this.setState({
@@ -61,12 +65,19 @@ export class Dashboard extends Component {
           })
     }
     render() {
-        const {notes} = this.props
+        const {notes,name} = this.props
+        console.log(name)
+        console.log("time",this.state.wish)
         if(this.state.authenticated){
-            return <h1>
-                {/*  */}
-                Hello User !
-            </h1>
+            return <div className="p-2">
+               <h3>Hello {name} !</h3>
+
+               
+               <p>
+                   Welcome to <strong>MakeNotes.com</strong>. You have Total {notes.length} notes in your list. <br/>
+
+               </p>
+            </div>
         }
         else {
             return (
@@ -85,7 +96,8 @@ const mapStateToProps = state=>{
     return {
         email:state.email,
         notes:state.notes,
-        state:state
+        state:state,
+        name:state.name
     }
 }
 const mapStateToDispatch= dispatch=>{

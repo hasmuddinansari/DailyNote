@@ -63,7 +63,6 @@ export class RegisterForm extends Component {
         const allUser = snapshot.val()
         if(allUser !==undefined){
           const userData = Object.values(allUser)
-          console.log(userData)
           getIt = this.checkTrue(userData, this.state.form.email)
         }
       });
