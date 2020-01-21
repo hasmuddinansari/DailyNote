@@ -22,9 +22,11 @@
 }
 .change-font {
   /* font-size: medium; */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   text-align: left;
-  line-height: 1.9rem;
+  display:flex;
+  font-size:18px;
+  flex-wrap: nowrap;
 }
 
 .bg-color {

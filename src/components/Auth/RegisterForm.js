@@ -5,7 +5,6 @@ import Checkbox from "@material-ui/core/Checkbox";
 import {Link} from "react-router-dom"
 import firebase from "firebase"
 import 'firebase/database'
-var olderUser = ""
 export class RegisterForm extends Component {
   constructor(props) {
     super(props);
@@ -24,6 +23,7 @@ export class RegisterForm extends Component {
   }
   handleChange = e => {
     this.setState({
+      ...this.state,
       form: {
         ...this.state.form,
         [e.target.name]: e.target.value
@@ -32,12 +32,24 @@ export class RegisterForm extends Component {
   };
   handleChangeCheckBox = event => {
     this.setState({
+      ...this.state,
       toggle: !event.target.checked
     });
     console.log(this.state.toggle);
   };
-  submit = () => {
-    // console.log(this.state);
+
+  checkTrue= (arr, check)=>{
+    let found = false
+    for(let i=0; i<arr.length; i++){
+        if(arr[i].email===check){
+          found = true
+        }
+    }
+    return found
+  }
+  submit = (e) => {
+    console.log(this.state.form);
+    // e.preventDefault()
     const {name,
     email,
     username,
@@ -45,32 +57,31 @@ export class RegisterForm extends Component {
     if(name.length==0 ||email.length==0 || username.length==0 || password.length==0){
       alert("All field mendotary to fill")
     }
-    else {  
-          this.users.orderByKey().on("value", snapshot=>{
-          const allUser = snapshot.val()
-          if(allUser !==undefined){
-            const userData = Object.values(allUser)
-            olderUser = userData.filter(user=>{
-            return user.email == this.state.form.email
-          })
-          console.log(olderUser)
-          }
-          
-      })
-      if(olderUser==null || olderUser==undefined || olderUser.length ==0 ) {
+    else {
+      var getIt;
+      this.users.orderByKey().on("value", snapshot=>{
+        const allUser = snapshot.val()
+        if(allUser !==undefined){
+          const userData = Object.values(allUser)
+          console.log(userData)
+          getIt = this.checkTrue(userData, this.state.form.email)
+        }
+      });
+      console.log("second",getIt)
+      if(getIt==false){
         const idGenerate = this.users.push().key
-        this.users.child(idGenerate).set({
-        ...this.state.form
-        }).then(()=>{
+            this.users.child(idGenerate).set({
+            ...this.state.form
+             })
         alert("User Registered Successfully")
-        })
         this.reset()
       }
       else{
-        alert("User is already registered with this email or this username")
-      } 
+        alert("Already Registered")
       }
-  };
+    }  
+  };       
+
   reset =()=>{
     this.setState({
       form: {
@@ -140,8 +151,12 @@ export class RegisterForm extends Component {
             variant="outlined"
           />
           <Button
-            onClick={this.submit}
             variant="outlined"
+            type="submit"
+            onClick={(e)=>{
+              e.preventDefault()
+              this.submit()
+            }}
             className="py-2  m-2 bg-dark text-white"
             color="primary"
           >

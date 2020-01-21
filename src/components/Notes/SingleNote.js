@@ -15,9 +15,9 @@ export class SingleNote extends Component {
             <div className="container p-1 border border-dark shdw bg-color">
                 {this.noteItem ? <div className="container text-center">
                 <h2 className="text-info">{this.noteItem.title}</h2>
-                <p className="change-font p-5">
+                <pre className="change-font p-5">
                     {this.noteItem.about}
-                </p>
+                </pre>
                 <p className="text-right text-muted">
                    <p> {this.noteItem.date}, {this.noteItem.time} </p>
                    <p>Author : <strong> {this.noteItem.username}</strong></p>
