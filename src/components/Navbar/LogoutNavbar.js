@@ -44,7 +44,7 @@ class LogoutNavbar extends Component{
             <Link className="text-white" style={style} to="/note">All Notes</Link>
             </button>
                 <h4 className="bg-info mouseHover mx-2 p-1 mt-1 text-dark rounded-circle" data-toggle="collapse" href="#logout" role="button" aria-expanded="false" aria-controls="logout">
-                   MD
+                   {this.props.name[0]+this.props.name[1]}
                 </h4>
             <button onClick={this.logout} className="btn collapse btn-danger mx-2" id="logout">
                 Logout
@@ -56,7 +56,8 @@ class LogoutNavbar extends Component{
 }
 const mapStateToProps = state =>{
     return {
-        email:state.email
+        email:state.email,
+        name:state.name.toUpperCase()
     }
 }
 export default connect(mapStateToProps)(LogoutNavbar)
