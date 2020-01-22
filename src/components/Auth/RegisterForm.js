@@ -47,6 +47,17 @@ export class RegisterForm extends Component {
     }
     return found
   }
+  //email validation
+  emailValidation = email =>{
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(email.match(mailformat)){
+      return true
+    }
+    else{
+      return false
+    }
+
+  }
   submit = (e) => {
     console.log(this.state.form);
     // e.preventDefault()
@@ -56,6 +67,9 @@ export class RegisterForm extends Component {
     password} = this.state.form
     if(name.length==0 ||email.length==0 || username.length==0 || password.length==0){
       alert("All field mendotary to fill")
+    }
+    else if(!this.emailValidation(email)){
+        alert("Email is wrong!")
     }
     else {
       var getIt;
@@ -76,7 +90,7 @@ export class RegisterForm extends Component {
         this.reset()
       }
       else{
-        alert("Already Registered")
+        alert("the email address you have entered is already registered")
       }
     }  
   };       
