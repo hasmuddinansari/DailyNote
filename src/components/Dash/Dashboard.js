@@ -71,11 +71,9 @@ export class Dashboard extends Component {
         if(this.state.authenticated){
             return <div className="p-2">
                <h3>Hello {name} !</h3>
-
-               
                <p>
                    Welcome to <strong>MakeNotes.com</strong>. You have Total {notes.length} notes in your list. <br/>
-
+                   
                </p>
             </div>
         }
