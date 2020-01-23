@@ -9,7 +9,7 @@ export default function NotesCard(props) {
     // console.log("match",match.match)
     return (
         <div className="col-md-4 col-12 p-2 animated zoomInUp">
-            <div className="bg-light shdw ">
+            <div className="card bg-light shdw ">
             <div className="p-3 row justify-content-between">
             <h5 className="mx-2">{note.title}</h5>
             <span className="mx-2">
