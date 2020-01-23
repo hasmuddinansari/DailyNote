@@ -8,9 +8,9 @@ export default function NotesCard(props) {
     const {deleteItem,note, match,name} = props
     // console.log("match",match.match)
     return (
-        <div className="col-4 p-2 animated zoomInUp">
-            <div className="card bg-light shdw ">
-            <div className="p-2 d-flex flex-row justify-content-between">
+        <div className="col-md-4 col-12 p-2 animated zoomInUp">
+            <div className="bg-light shdw ">
+            <div className="p-2 row justify-content-between">
             <h4>{note.title}</h4>
             <span>
             <UpdateNoteCard data={note}/>
