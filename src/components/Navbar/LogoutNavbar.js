@@ -24,7 +24,7 @@ class LogoutNavbar extends Component{
             username:""
         })
     }
-    componentDidMount(){
+    componentWillMount(){
         this.auth.ref("auth").orderByKey().on("value",snapshot=>{
             const email = snapshot.val().email
             this.setState({
@@ -43,9 +43,8 @@ class LogoutNavbar extends Component{
             <button className="btn btn-outline-danger mx-2">
             <Link className="text-white" style={style} to="/note">All Notes</Link>
             </button>
-                <h4 className="bg-info mouseHover mx-2 p-1 mt-1 text-dark rounded-circle" data-toggle="collapse" href="#logout" role="button" aria-expanded="false" aria-controls="logout">
-                   {this.props.name[0]+this.props.name[1]}
-                </h4>
+
+            <img src="/images/user.png" className="mouseHover img-fluid"  data-toggle="collapse" href="#logout" role="button" aria-expanded="false" aria-controls="logout"/>
             <button onClick={this.logout} className="btn collapse btn-danger mx-2" id="logout">
                 Logout
             </button>
@@ -57,7 +56,6 @@ class LogoutNavbar extends Component{
 const mapStateToProps = state =>{
     return {
         email:state.email,
-        name:state.name.toUpperCase()
     }
 }
 export default connect(mapStateToProps)(LogoutNavbar)
