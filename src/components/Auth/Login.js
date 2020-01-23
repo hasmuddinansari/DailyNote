@@ -60,6 +60,7 @@ export class Login extends Component {
                 name:this.olderUser[0].name,
                 username:this.olderUser[0].username
             })
+            localStorage.setItem("auth","true")
             this.props.history.push("/")
         }
     }

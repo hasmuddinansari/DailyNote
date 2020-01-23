@@ -21,8 +21,9 @@ class LogoutNavbar extends Component{
             authenticated:false,
             email:"",
             name:"",
-            username:""
+            username:"",
         })
+        localStorage.setItem("auth", false)
     }
     componentWillMount(){
         this.auth.ref("auth").orderByKey().on("value",snapshot=>{

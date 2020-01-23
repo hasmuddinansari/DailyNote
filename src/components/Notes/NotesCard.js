@@ -1,6 +1,7 @@
 import React from 'react'
 import DeleteIcon from '@material-ui/icons/Delete';
 import {Link} from "react-router-dom"
+import UpdateNoteCard from "./UpdateNoteCard"
 
 
 export default function NotesCard(props) {
@@ -12,6 +13,7 @@ export default function NotesCard(props) {
             <div className="p-2 d-flex flex-row justify-content-between">
             <h4>{note.title}</h4>
             <span>
+            <UpdateNoteCard data={note}/>
             <DeleteIcon onClick={()=>deleteItem(note.id)} className="mouseHover bg-danger text-white p-1 border rounded-circle" title="Delete"/>
             </span>
             </div>           

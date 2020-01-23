@@ -88,8 +88,8 @@ export class Create extends Component {
   render() {
     return (
       <div className="container-fluid p-4 bg-change">
-      <div className="container p-5 row ">
-        <form className="flex-column col-md-5 col-12 bg-light  border p-2 d-flex">
+      <div className="container p-3 row justify-content-center ">
+        <form className="flex-column col-md-4 col-12 bg-light  border p-2 d-flex">
           <h2 className="text-center text-danger">NOTE</h2>
           <TextField
             className=" m-2 mt-5"
@@ -118,7 +118,7 @@ export class Create extends Component {
            <h5>Add Note</h5>
           </Button>
         </form>
-        <div className="bg-dark">
+        <div className="bg-create col-12 col-md-8">
           <h4 className="text-white m-3">NOTES DETAILS</h4>
           <textarea  id="outlined-basic"
             className="m-2"
@@ -126,7 +126,7 @@ export class Create extends Component {
             name="about"
             label="About"
             placeholder="Brief explaination about your note.."
-            value={this.state.about}  style={{height: "calc(16em + 4.75rem + 6px)", width:"35rem"}}></textarea>
+            value={this.state.about}  style={{height: "calc(16em + 4.75rem + 6px)", width:"calc(25em + 10.75rem)"}}></textarea>
         </div>
       </div>
       </div>

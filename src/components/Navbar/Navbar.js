@@ -10,14 +10,17 @@ class Navbar extends Component {
         this.database = firebase.database()
         this.rootRef = this.database.ref("auth")
         this.state={
-            auth:""
+            auth:"",
+            localAuth:"",
         }
     }
-    componentDidMount(){
+    componentWillMount(){
+        const localAuth = localStorage.getItem("auth")
         this.rootRef.orderByKey().on('value', snapshot=>{
             let temp = snapshot.val()
             this.setState({
-                auth:temp.authenticated
+                auth:temp.authenticated,
+                localAuth:localAuth
             })
           })
     }
@@ -29,7 +32,7 @@ class Navbar extends Component {
        </button>
        <Link className="navbar-brand text-white" to="/">MakeNotes.com</Link>
        <div className="collapse navbar-collapse row justify-content-end" id="navbarTogglerDemo03">
-          {!this.state.auth ? <LoginNavbar/>:<LogoutNavbar/>}
+          {this.state.auth && this.state.localAuth ?<LogoutNavbar/>: <LoginNavbar/>}
        </div>
      </nav>
          )

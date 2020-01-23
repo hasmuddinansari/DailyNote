@@ -17,7 +17,6 @@ export class Dashboard extends Component {
             email:"",
             name:"",
             username:"",
-            wish:""
         }
     }
     componentDidMount(){
@@ -52,7 +51,7 @@ export class Dashboard extends Component {
             this.setState({
                 ...this.state,
                 authenticated:auth.authenticated,
-                email:newEmail,
+                email:newEmail
             })
             this.props.changeEmail(newEmail, auth.name, auth.username)
             }
@@ -66,9 +65,9 @@ export class Dashboard extends Component {
     }
     render() {
         const {notes,name} = this.props
-        console.log(name)
-        console.log("time",this.state.wish)
-        if(this.state.authenticated){
+        const localAuth = localStorage.getItem("auth")
+        const {authenticated}=this.state
+        if(authenticated && localAuth){
             return <div className="p-2">
                <h3>Hello {name} !</h3>
                <p>

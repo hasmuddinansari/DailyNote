@@ -16,9 +16,11 @@
   height:1.4rem;
   border-radius: 50%;
   background-color:lightcyan;
-  color:white;
+  color:white;}
 
-
+.bg-create{
+  background: url("/images/bgofcreate.jpeg");
+  background-size:contain;
 }
 .navbar-style {
   background-color: #4c4177;

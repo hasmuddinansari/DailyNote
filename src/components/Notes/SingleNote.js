@@ -4,6 +4,7 @@ import firebase from "firebase"
 import "firebase/database"
 
 
+
 export class SingleNote extends Component {
     constructor(props){
         super(props)
