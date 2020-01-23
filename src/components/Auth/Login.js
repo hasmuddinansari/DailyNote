@@ -70,8 +70,8 @@ export class Login extends Component {
   };
 
   render() {
-    //already logged in then redirect to homepage..else login page.
-    if(this.state.authenticated){
+   const localAuth = localStorage.getItem("auth")
+    if(this.state.authenticated && localAuth){
       return <Route render={(props)=>{
         return <Redirect
         to={{
