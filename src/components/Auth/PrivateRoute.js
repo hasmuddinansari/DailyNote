@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import firebase from 'firebase'
 import 'firebase/database'
 import {Route, Redirect} from "react-router-dom"
+import {connect} from "react-redux"
 
 export class PrivateRoute extends Component {
     constructor(props){
@@ -11,19 +12,7 @@ export class PrivateRoute extends Component {
             localAuth:""
         }
         this.auth =firebase.database()
-    }
-    componentWillMount(){
-     const localAuth = localStorage.getItem("auth")
-        this.auth.ref("auth").orderByKey().on("value", snap=>{
-            let temp = snap.val()
-            this.setState({
-                authenticated:temp.authenticated,
-                localAuth:localAuth
-            })
-        })
-        
-
-    }   
+    }  
     render() {
         const { component: Component, ...rest } = this.props;
         console.log(this.state)
@@ -31,7 +20,7 @@ export class PrivateRoute extends Component {
           <Route
             {...rest}
             render={props => {
-              if (this.state.authenticated && this.state.localAuth) {
+              if (this.props.auth.authenticated) {
                 return <Component {...props} />;
               } else {
                 return (
@@ -50,5 +39,10 @@ export class PrivateRoute extends Component {
         );
     }
 }
+const mapStateToProps=(state)=>{
+  return {
+    auth:state.auth
+  }
+}
 
-export default PrivateRoute
+export default connect(mapStateToProps)(PrivateRoute)

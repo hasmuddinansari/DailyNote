@@ -2,28 +2,21 @@ import React, {Component} from 'react'
 import {Link} from "react-router-dom"
 import LoginNavbar from "./LoginNavbar"
 import LogoutNavbar from "./LogoutNavbar"
-import 'firebase/database'
-import firebase from "firebase"
+import {connect} from "react-redux"
+
 class Navbar extends Component {
     constructor(props){
         super(props)
-        this.database = firebase.database()
-        this.rootRef = this.database.ref("auth")
-        this.state={
-            auth:"",
-            localAuth:"",
-        }
+        // this.state={
+        //     auth:"",
+        // }
     }
-    componentWillMount(){
-        const localAuth = localStorage.getItem("auth")
-        this.rootRef.orderByKey().on('value', snapshot=>{
-            let temp = snapshot.val()
-            this.setState({
-                auth:temp.authenticated,
-                localAuth:localAuth
-            })
-          })
-    }
+    // componentWillMount(){
+    //         const authenticated = this.props.auth.authenticated
+    //         this.setState({
+    //             auth:authenticated,
+    //         })
+    // }
      render(){
          return (
              <nav className="navbar  navbar-expand-lg navbar-light navbar-style">
@@ -32,12 +25,17 @@ class Navbar extends Component {
        </button>
        <Link className="navbar-brand text-white" to="/">MakeNotes.com</Link>
        <div className="collapse navbar-collapse row justify-content-end" id="navbarTogglerDemo03">
-          {this.state.auth && this.state.localAuth ?<LogoutNavbar/>: <LoginNavbar/>}
+          {this.props.auth.authenticated ?<LogoutNavbar/>: <LoginNavbar/>}
        </div>
      </nav>
          )
      }
      }
 
+const mapStateToProps = state=>{
+    return {
+        auth:state.auth
+    }
+}
 
-export default Navbar
+export default connect(mapStateToProps)(Navbar)

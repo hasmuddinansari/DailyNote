@@ -9,7 +9,6 @@ import {connect} from "react-redux"
 
 //initilizing config 
 firebase.initializeApp(fbConfig);
-firebase.analytics();
 export class Create extends Component {
   constructor(props) {
     super(props);
@@ -32,25 +31,24 @@ export class Create extends Component {
   //as per email change path of ref of database to hanldle individualy dataa.
   componentWillMount(){
           document.title = "Create Notes"
-          this.database.ref('auth').orderByKey().on('value', snapshot=>{
-              let auth = snapshot.val()
+              const {email, authenticated} = this.props.auth
               let newEmail =""
-              for(let i=0; i < auth.email.length; i++){
-                  if(auth.email[i]=="@"){
+              for(let i=0; i < email.length; i++){
+                  if(email[i]=="@"){
                     newEmail += "AT"
                   }
-                  else if(auth.email[i]=="."){
+                  else if(email[i]=="."){
                     newEmail += "dot"
                   }
                   else{
-                    newEmail += auth.email[i]
+                    newEmail += email[i]
                   }
               }
               this.setState({
                 email:newEmail
               })
               this.props.changeEmail(newEmail)
-            })
+            
   }
   submit = () => {
     console.log(this.state);
@@ -133,9 +131,14 @@ export class Create extends Component {
     );
   }
 }
+const mapStateToPro=state=>{
+  return {
+    auth:state.auth
+  }
+}
 const mapDisToPro = (dispatch)=>{
   return {
     changeEmail:email=>dispatch(changeEmail(email))
   }
 }
-export default connect(null, mapDisToPro)(Create);
+export default connect(mapStateToPro, mapDisToPro)(Create);

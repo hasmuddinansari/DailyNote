@@ -52,6 +52,7 @@ export class UpdateNoteCard extends Component {
   }
   handleSubmit=()=>{
     firebase.database().ref(`notes/${this.props.email}/${this.props.data.id}`).update(this.state.note)
+    alert("Updated.")
     this.handleClose()
   }
   render(){
@@ -65,10 +66,10 @@ export class UpdateNoteCard extends Component {
           <Modal.Title>{title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          <p className="text-info"> Title :</p>
-          <TextField onChange={this.handleChange} name="title" id="standard-basic" value={title}  />
-          <p className="text-dark"> Description : </p>
-          <TextField onChange={this.handleChange} name="disc" id="standard-basic" value={disc}  />
+          <h5 className="text-info"> Title :</h5>
+          <TextField className="form-control" onChange={this.handleChange} name="title" id="standard-basic" value={title}  />
+          <h5 className="text-success"> Description : </h5>
+          <TextField  className="form-control" onChange={this.handleChange} name="disc" id="standard-basic" value={disc}  />
           <h4 className="text-danger">About</h4>
           <textarea  id="outlined-basic"
             name="about"

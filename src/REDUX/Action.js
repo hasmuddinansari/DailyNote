@@ -13,3 +13,11 @@ export const updateState = (newState)=>{
         payload:newState
     }
 }
+
+export const setAuth=(authenticated, email)=>{
+    return {
+        type:"SET_AUTH",
+        authenticated:authenticated,
+        email:email
+    }
+}

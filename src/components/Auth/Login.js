@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import firebase from "firebase"
 import 'firebase/database'
 import {connect} from "react-redux"
-import {changeEmail} from "../../REDUX/Action"
+import {changeEmail, setAuth} from "../../REDUX/Action"
 import {Link} from "react-router-dom"
 import {Route, Redirect} from "react-router-dom"
 
@@ -22,12 +22,8 @@ export class Login extends Component {
   }
   //if usern is already authenticated the user should be land on dashboard
   componentWillMount(){
-    this.database.ref("auth").orderByKey().on("value", snap=>{
-        let temp = snap.val()
         this.setState({
-            authenticated:temp.authenticated
-        })
-    })
+            authenticated:this.props.auth.authenticated})
 }
   handleChange = e => {
     this.setState({
@@ -55,12 +51,11 @@ export class Login extends Component {
         }
         else if(this.olderUser[0].email==email && this.olderUser[0].password==password){
             this.database.ref("auth").set({
-                authenticated:true,
                 email:email,
                 name:this.olderUser[0].name,
                 username:this.olderUser[0].username
             })
-            localStorage.setItem("auth","true")
+            this.props.setAuth(true, email)
             this.props.history.push("/")
         }
     }
@@ -70,8 +65,7 @@ export class Login extends Component {
   };
 
   render() {
-   const localAuth = localStorage.getItem("auth")
-    if(this.state.authenticated && localAuth){
+    if(this.state.authenticated){
       return <Route render={(props)=>{
         return <Redirect
         to={{
@@ -119,8 +113,15 @@ export class Login extends Component {
 
 const mapDisToPro = dispatch =>{
   return {
-    changeEmail:(email)=>dispatch(changeEmail(email))
+    changeEmail:(email)=>dispatch(changeEmail(email)),
+    setAuth:(authenticated, email)=>dispatch(setAuth(authenticated, email))
   }
 }
 
-export default connect(null, mapDisToPro)(Login);
+const mapStateToProps = state =>{
+  return {
+    auth:state.auth
+  }
+}
+
+export default connect(mapStateToProps, mapDisToPro)(Login);

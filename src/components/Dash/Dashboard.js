@@ -10,6 +10,7 @@ export class Dashboard extends Component {
     constructor(props){
         super(props)
         this.database = firebase.database()
+        this.auth = this.database.ref("auth")
         this.rootRef = this.database.ref("notes")
         this.state={
             data:[],
@@ -19,22 +20,28 @@ export class Dashboard extends Component {
             username:"",
         }
     }
+    componentWillMount(){
+        this.auth.orderByKey().on("value",snap=>{
+            this.setState({
+                name:snap.val().name
+            })
+        })
+    }
     componentDidMount(){
         document.title ="Dashboard"
         // ordering auth to bring data to show their table
-        this.database.ref('auth').orderByKey().on('value', snapshot=>{
-            let auth = snapshot.val()
-            if(auth.authenticated){
-                let newEmail =""
-            for(let i=0; i < auth.email.length; i++){
-                if(auth.email[i]=="@"){
+            const{email, authenticated} = this.props.auth
+            if(authenticated){
+                let newEmail = ""
+            for(let i=0; i <email.length; i++){
+                if(email[i]=="@"){
                   newEmail += "AT"
                 }
-                else if(auth.email[i]=="."){
+                else if(email[i]=="."){
                   newEmail += "dot"
                 }
                 else{
-                  newEmail += auth.email[i]
+                  newEmail += email[i]
                 }
             }
             this.database.ref("notes").child(newEmail).orderByKey().on('value',snapshot=>{
@@ -50,24 +57,24 @@ export class Dashboard extends Component {
 
             this.setState({
                 ...this.state,
-                authenticated:auth.authenticated,
+                authenticated:this.props.auth.authenticated,
                 email:newEmail
             })
-            this.props.changeEmail(newEmail, auth.name, auth.username)
+            this.props.changeEmail(newEmail, "auth.name", "auth.username")
             }
 
             this.setState({
                 ...this.state,
-                authenticated:auth.authenticated,
+                authenticated:this.props.auth.authenticated,
             })
             
-          })
+          
     }
     render() {
-        const {notes,name} = this.props
-        const localAuth = localStorage.getItem("auth")
-        const {authenticated}=this.state
-        if(authenticated && localAuth){
+        const {notes} = this.props
+        const {name} = this.state
+        const {authenticated}=this.props.auth
+        if(authenticated){
             return <div className="p-2">
                <h3>Hello {name} !</h3>
                <p>
@@ -94,7 +101,8 @@ const mapStateToProps = state=>{
         email:state.email,
         notes:state.notes,
         state:state,
-        name:state.name
+        name:state.name,
+        auth:state.auth
     }
 }
 const mapStateToDispatch= dispatch=>{

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import firebase from 'firebase'
 import 'firebase/database'
 import {connect} from "react-redux"
+import {setAuth} from "../../REDUX/Action"
 const style = {
     textDecoration:"none",
     fontFamily:"Courier New",
@@ -18,12 +19,12 @@ class LogoutNavbar extends Component{
 
     logout = ()=>{
         this.auth.ref("auth").set({
-            authenticated:false,
             email:"",
             name:"",
             username:"",
         })
-        localStorage.setItem("auth", false)
+        this.props.setAuth(false,"")
+
     }
     componentWillMount(){
         this.auth.ref("auth").orderByKey().on("value",snapshot=>{
@@ -59,4 +60,9 @@ const mapStateToProps = state =>{
         email:state.email,
     }
 }
-export default connect(mapStateToProps)(LogoutNavbar)
+const mapDispatchToProps = dispatch =>{
+    return {
+        setAuth:(authenticated, email)=>dispatch(setAuth(authenticated, email))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(LogoutNavbar)
