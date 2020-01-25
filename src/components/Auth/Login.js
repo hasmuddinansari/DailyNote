@@ -46,7 +46,7 @@ export class Login extends Component {
             alert("Either you are not registered ! Or Email or Password is wrong")
         }
         else if(this.olderUser[0].email==email && this.olderUser[0].password==password){
-            this.props.setAuth(true, email, this.olderUser[0].name)
+            this.props.setAuth(true, email)
             this.props.history.push("/")
         }
     }
@@ -105,7 +105,7 @@ export class Login extends Component {
 const mapDisToPro = dispatch =>{
   return {
     changeEmail:(email)=>dispatch(changeEmail(email)),
-    setAuth:(authenticated, email, name)=>dispatch(setAuth(authenticated, email, name))
+    setAuth:(authenticated, email)=>dispatch(setAuth(authenticated, email))
   }
 }
 

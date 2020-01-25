@@ -15,7 +15,7 @@ class LogoutNavbar extends Component{
     }
 
     logout = ()=>{
-        this.props.setAuth(false,"")
+        this.props.setAuth(false, "")
 
     }
     render(){
