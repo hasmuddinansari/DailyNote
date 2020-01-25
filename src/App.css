@@ -47,7 +47,6 @@ body{
   max-height:100vh;
   height:60vh;
   width:100wh;
-  background: url("/images/homebg.gif") no-repeat;
-  background-size: cover;
+  font-size:30px;
   background-attachment: fixed;
 }
