@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
-import firebase from "firebase"
-import "firebase/database"
 
 
 
@@ -12,16 +10,8 @@ export class SingleNote extends Component {
             name:""
         }
         this.id = this.props.match.params.id
-        this.auth = firebase.database().ref("auth")
         this.noteItem = this.props.notes.find(note=>{
             return note.id == this.id
-        })
-    }
-    componentWillMount(){
-        this.auth.orderByKey().on("value",snap=>{
-            this.setState({
-                name:snap.val().name
-            })
         })
     }
     render() {
@@ -37,7 +27,7 @@ export class SingleNote extends Component {
                 </pre>
                 <p className="text-right text-muted">
                    <p> {this.noteItem.date}, {this.noteItem.time} </p>
-                   <p>Author : <strong> {name}</strong></p>
+                   <p>Author : <strong> {this.props.auth.name}</strong></p>
                 </p>
         </div>: <h3>Not Found</h3> }
             </div>
@@ -47,7 +37,8 @@ export class SingleNote extends Component {
 const mapStateToProps = state=>{
     return {
         notes:state.notes,
-        name:state.name
+        name:state.name,
+        auth:state.auth
     }
 }
 export default connect(mapStateToProps)(SingleNote)

@@ -2,8 +2,6 @@ export const changeEmail = (email,name,username)=> {
     return {
         type:"CHANGE_EMAIL",
         email:email,
-        name:name,
-        username:username
     }
 }
 
@@ -14,10 +12,11 @@ export const updateState = (newState)=>{
     }
 }
 
-export const setAuth=(authenticated, email)=>{
+export const setAuth=(authenticated, email, name)=>{
     return {
         type:"SET_AUTH",
         authenticated:authenticated,
-        email:email
+        email:email,
+        name:name
     }
 }

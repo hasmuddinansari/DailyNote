@@ -10,7 +10,6 @@ export class Dashboard extends Component {
     constructor(props){
         super(props)
         this.database = firebase.database()
-        this.auth = this.database.ref("auth")
         this.rootRef = this.database.ref("notes")
         this.state={
             data:[],
@@ -19,13 +18,6 @@ export class Dashboard extends Component {
             name:"",
             username:"",
         }
-    }
-    componentWillMount(){
-        this.auth.orderByKey().on("value",snap=>{
-            this.setState({
-                name:snap.val().name
-            })
-        })
     }
     componentDidMount(){
         document.title ="Dashboard"
@@ -72,8 +64,7 @@ export class Dashboard extends Component {
     }
     render() {
         const {notes} = this.props
-        const {name} = this.state
-        const {authenticated}=this.props.auth
+        const {authenticated, name}=this.props.auth
         if(authenticated){
             return <div className="p-2">
                <h3>Hello {name} !</h3>

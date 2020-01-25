@@ -7,16 +7,7 @@ import {connect} from "react-redux"
 class Navbar extends Component {
     constructor(props){
         super(props)
-        // this.state={
-        //     auth:"",
-        // }
     }
-    // componentWillMount(){
-    //         const authenticated = this.props.auth.authenticated
-    //         this.setState({
-    //             auth:authenticated,
-    //         })
-    // }
      render(){
          return (
              <nav className="navbar  navbar-expand-lg navbar-light navbar-style">

@@ -52,7 +52,7 @@ const mapStateToProps = state =>{
     return {
         notes:state.notes,
         email:state.email,
-        name:state.name
+        name:state.auth.name
     }
 }
 const mapDispatchToProps = dispatch =>{

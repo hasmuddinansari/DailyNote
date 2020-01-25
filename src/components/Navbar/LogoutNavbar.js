@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
-import firebase from 'firebase'
-import 'firebase/database'
 import {connect} from "react-redux"
 import {setAuth} from "../../REDUX/Action"
 const style = {
@@ -13,27 +11,12 @@ const style = {
 class LogoutNavbar extends Component{
     constructor(props){
         super(props)
-        this.auth = firebase.database()
         this.email =""
     }
 
     logout = ()=>{
-        this.auth.ref("auth").set({
-            email:"",
-            name:"",
-            username:"",
-        })
         this.props.setAuth(false,"")
 
-    }
-    componentWillMount(){
-        this.auth.ref("auth").orderByKey().on("value",snapshot=>{
-            const email = snapshot.val().email
-            this.setState({
-                ...this.state,
-                email:email
-            })
-        })
     }
     render(){
         return (
@@ -62,7 +45,7 @@ const mapStateToProps = state =>{
 }
 const mapDispatchToProps = dispatch =>{
     return {
-        setAuth:(authenticated, email)=>dispatch(setAuth(authenticated, email))
+        setAuth:(authenticated, email, name)=>dispatch(setAuth(authenticated, email, name))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LogoutNavbar)

@@ -1,11 +1,12 @@
 const initialState = {
     notes:[],
     email:"",
-    name:"",
     username:"",
     auth:{
         authenticated:false,
         email:"",
+        name:"",
+        
     }
 }
 const reducer = (state=initialState, action)=>{
@@ -14,8 +15,6 @@ const reducer = (state=initialState, action)=>{
                 return {
                     ...state,
                     email:action.email,
-                    name:action.name,
-                    username:action.username
                 }
             case "UPDATE":
                 return {
@@ -28,7 +27,8 @@ const reducer = (state=initialState, action)=>{
                     auth:{
                         ...state.auth,
                         authenticated:action.authenticated,
-                        email:action.email
+                        email:action.email,
+                        name:action.name
                     }
                 }
             

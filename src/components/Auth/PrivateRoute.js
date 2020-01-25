@@ -1,17 +1,10 @@
 import React, { Component } from 'react'
-import firebase from 'firebase'
-import 'firebase/database'
 import {Route, Redirect} from "react-router-dom"
 import {connect} from "react-redux"
 
 export class PrivateRoute extends Component {
     constructor(props){
         super(props)
-        this.state={
-            authenticated:"",
-            localAuth:""
-        }
-        this.auth =firebase.database()
     }  
     render() {
         const { component: Component, ...rest } = this.props;

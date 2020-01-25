@@ -20,11 +20,7 @@ export class Login extends Component {
       this.olderUser=[]
       
   }
-  //if usern is already authenticated the user should be land on dashboard
-  componentWillMount(){
-        this.setState({
-            authenticated:this.props.auth.authenticated})
-}
+  
   handleChange = e => {
     this.setState({
         ...this.state,
@@ -50,12 +46,7 @@ export class Login extends Component {
             alert("Either you are not registered ! Or Email or Password is wrong")
         }
         else if(this.olderUser[0].email==email && this.olderUser[0].password==password){
-            this.database.ref("auth").set({
-                email:email,
-                name:this.olderUser[0].name,
-                username:this.olderUser[0].username
-            })
-            this.props.setAuth(true, email)
+            this.props.setAuth(true, email, this.olderUser[0].name)
             this.props.history.push("/")
         }
     }
@@ -63,9 +54,9 @@ export class Login extends Component {
             
 }     
   };
-
+//if usern is already authenticated the user should be land on dashboard
   render() {
-    if(this.state.authenticated){
+    if(this.props.auth.authenticated){
       return <Route render={(props)=>{
         return <Redirect
         to={{
@@ -114,7 +105,7 @@ export class Login extends Component {
 const mapDisToPro = dispatch =>{
   return {
     changeEmail:(email)=>dispatch(changeEmail(email)),
-    setAuth:(authenticated, email)=>dispatch(setAuth(authenticated, email))
+    setAuth:(authenticated, email, name)=>dispatch(setAuth(authenticated, email, name))
   }
 }
 
