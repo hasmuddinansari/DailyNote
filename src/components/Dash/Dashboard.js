@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import {changeEmail,updateState} from "../../REDUX/Action"
 import firebase from 'firebase'
 import 'firebase/database'
+import RegisterForm from '../Auth/RegisterForm'
 
 // import Perfomance from "./Perfomance"
 
@@ -76,11 +77,7 @@ export class Dashboard extends Component {
         }
         else {
             return (
-                <div className="bg-home p-5 text-center">
-                   <h1 className="text-white">
-                       Welcome 
-                    </h1> 
-                </div>
+                <RegisterForm/>
             )
 
         }
