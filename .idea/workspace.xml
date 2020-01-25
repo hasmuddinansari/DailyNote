@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="079bf32b-cfed-4982-8e7f-6a2511164845" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/Create/Create.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Create/Create.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Notes/UpdateNoteCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Notes/UpdateNoteCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Notes/NotesCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Notes/NotesCard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
