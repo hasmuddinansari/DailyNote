@@ -40,7 +40,7 @@ export class AllNotes extends Component {
             <div className="container ">
                 <div className="row p-2">
                 {notes.length !==0 ? notes.map(note=>{
-                return <NotesCard name={this.props.name} key={note.id} match={this.props} deleteItem={this.deleteItem}  id={note.id} note={note}/>
+                return <NotesCard  key={note.id} match={this.props} deleteItem={this.deleteItem}  id={note.id} note={note}/>
                 }):<h1>You have {notes.length} note.<Link to="/create">Click here</Link> to ADD.</h1>}
                 {/* <NotesCard/> */}
                 </div>
@@ -52,7 +52,6 @@ const mapStateToProps = state =>{
     return {
         notes:state.notes,
         email:state.email,
-        name:state.auth.name
     }
 }
 const mapDispatchToProps = dispatch =>{

@@ -64,10 +64,10 @@ export class Dashboard extends Component {
     }
     render() {
         const {notes} = this.props
-        const {authenticated, name}=this.props.auth
+        const {authenticated}=this.props.auth
         if(authenticated){
             return <div className="p-2">
-               <h3>Hello {name} !</h3>
+               <h3>Hello !</h3>
                <p>
                    Welcome to <strong>MakeNotes.com</strong>. You have Total {notes.length} notes in your list. <br/>
                    

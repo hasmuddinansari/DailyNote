@@ -20,9 +20,6 @@ export default function NotesCard(props) {
             <div className="card-body">
                 <p>{note.disc}</p>
                 <p className="text-muted">
-                    Author: {name}
-                </p>
-                <p className="text-muted">
                     {note.date}, {note.time}
                 </p>
                 <Link className="btn btn-info" to={`${match.match.url}/${note.id}`} >

@@ -27,7 +27,6 @@ export class SingleNote extends Component {
                 </pre>
                 <p className="text-right text-muted">
                    <p> {this.noteItem.date}, {this.noteItem.time} </p>
-                   <p>Author : <strong> {this.props.auth.name}</strong></p>
                 </p>
         </div>: <h3>Not Found</h3> }
             </div>
