@@ -43,12 +43,13 @@ export class RegisterForm extends Component {
     for(let i=0; i<arr.length; i++){
         if(arr[i].email===check){
           found = true
+          break;
         }
     }
     return found
   }
   //email validation
-  emailValidation = email =>{
+  emailValidation =  email =>{
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if(email.match(mailformat)){
       return true
@@ -60,7 +61,7 @@ export class RegisterForm extends Component {
   }
   submit = (e) => {
     console.log(this.state.form);
-    // e.preventDefault()
+    e.preventDefault()
     const {name,
     email,
     username,
@@ -74,10 +75,10 @@ export class RegisterForm extends Component {
     else {
       var getIt;
       this.users.orderByKey().on("value", snapshot=>{
-        const allUser = snapshot.val()
+        var allUser = snapshot.val()
         if(allUser !==undefined){
           const userData = Object.values(allUser)
-          getIt = this.checkTrue(userData, this.state.form.email)
+          getIt =  this.checkTrue(userData, this.state.form.email)
         }
       });
       console.log("second",getIt)
@@ -89,7 +90,7 @@ export class RegisterForm extends Component {
         alert("User Registered Successfully")
         this.reset()
       }
-      else{
+      else if(getIt==true){
         alert("the email address you have entered is already registered")
       }
     }  
@@ -166,10 +167,7 @@ export class RegisterForm extends Component {
           <Button
             variant="outlined"
             type="submit"
-            onClick={(e)=>{
-              e.preventDefault()
-              this.submit()
-            }}
+            onClick={this.submit}
             className="py-2  m-2 bg-dark text-white"
             color="primary"
           >

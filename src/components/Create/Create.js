@@ -116,15 +116,14 @@ export class Create extends Component {
            <h5>Add Note</h5>
           </Button>
         </form>
-        <div className="bg-create col-12 col-md-8">
+        <div className="bg-create col-sm-12 h-100 col-md-8">
           <h4 className="text-white m-3">NOTES DETAILS</h4>
           <textarea  id="outlined-basic"
-            className="m-2"
             onChange={this.handleChange}
             name="about"
             label="About"
             placeholder="Brief explaination about your note.."
-            value={this.state.about}  style={{height: "calc(16em + 4.75rem + 6px)", width:"calc(25em + 10.75rem)"}}></textarea>
+            value={this.state.about}  style={{height: "60vh", width:"50vw"}}></textarea>
         </div>
       </div>
       </div>
