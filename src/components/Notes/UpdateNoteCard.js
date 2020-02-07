@@ -6,6 +6,7 @@ import TextField  from "@material-ui/core/TextField"
 import firebase from "firebase"
 import "firebase/database"
 import {connect} from "react-redux"
+import swal from "sweetalert"
 
 export class UpdateNoteCard extends Component {
   constructor(props){
@@ -52,7 +53,7 @@ export class UpdateNoteCard extends Component {
   }
   handleSubmit=()=>{
     firebase.database().ref(`notes/${this.props.email}/${this.props.data.id}`).update(this.state.note)
-    alert("Updated.")
+    swal("This note is changed now.", "","success")
     this.handleClose()
   }
   render(){

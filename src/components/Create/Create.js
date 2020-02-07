@@ -6,6 +6,7 @@ import 'firebase/database'
 import fbConfig from "../../Config/fbConfig"
 import {changeEmail} from "../../REDUX/Action"
 import {connect} from "react-redux"
+import swal from "sweetalert"
 
 //initilizing config 
 firebase.initializeApp(fbConfig);
@@ -56,7 +57,7 @@ export class Create extends Component {
     //generating new id everytime;
    const {title, disc, about} = this.state
    if(title.length==0 || disc.length ==0 || about.length==0){
-     alert("All field are mendotary to fill")
+     swal("All field are mendotary to fill", "", "warning")
    }
    else {
     const idGenerate = this.rootRef.push().key
@@ -69,9 +70,10 @@ export class Create extends Component {
         ...this.state,id:idGenerate,date:new Date().toLocaleDateString(), time:time
     }    
     ).then(()=>{
-      alert("Note is added in database")
+      swal("Note is added in database", "See in All Data", "success")
+
     }).catch(err=>{
-      alert(err)
+      swal(err, "", "warning")
     })
     this.reset()
    }

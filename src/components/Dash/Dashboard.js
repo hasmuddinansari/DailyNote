@@ -69,11 +69,11 @@ export class Dashboard extends Component {
         const {notes} = this.props
         const {authenticated}=this.props.auth
         if(authenticated){
-            return <div className="p-2">
+            return <div className="p-2 bg-white">
                <h3>Hello !</h3>
-               <p>
-                   Welcome to <strong>MakeNotes.com</strong>. You have Total {notes.length} notes in your list. <br/>
-                   
+               <p className="d-flex flex-column">
+                   <img src="./images/cycle2.gif" className="img-fluid cycle-animate"/>
+                  <p> Welcome to <strong>MakeNotes.com</strong>. You have Total {notes.length} notes in your list. <br/></p>
                </p>
             </div>
         }

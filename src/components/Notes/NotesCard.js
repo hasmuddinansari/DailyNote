@@ -8,12 +8,12 @@ export default function NotesCard(props) {
     const {deleteItem,note, match,name} = props
     // console.log("match",match.match)
     return (
-        <div className="col-sm-6 col-md-4  p-2 animated zoomInUp">
+        <div className="col-sm-6 col-md-4  p-2">
             <div className="card h-100 card-body bg-light shdw ">
-            <div className="p-2 row justify-content-between">
-            <h5 className="mx-2">{note.title}</h5>
-            <span className="mx-2">
-            <UpdateNoteCard data={note}/>
+            <div className="row  justify-content-between">
+            <h5 className="col-8 text-dark">{note.title}</h5>
+            <span className="col-4 ">
+            <UpdateNoteCard className="mx-1" data={note}/>
             <DeleteIcon onClick={()=>deleteItem(note.id)} className="mouseHover bg-danger text-white p-1 border rounded-circle" title="Delete"/>
             </span>
             </div>           

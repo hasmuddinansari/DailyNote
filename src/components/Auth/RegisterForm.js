@@ -5,6 +5,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import {Link} from "react-router-dom"
 import firebase from "firebase"
 import 'firebase/database'
+import swal from 'sweetalert';
+
 export class RegisterForm extends Component {
   constructor(props) {
     super(props);
@@ -67,10 +69,12 @@ export class RegisterForm extends Component {
     username,
     password} = this.state.form
     if(name.length==0 ||email.length==0 || username.length==0 || password.length==0){
-      alert("All field mendotary to fill")
+      swal("All field mendotary to fill","","warning")
     }
     else if(!this.emailValidation(email)){
-        alert("Email is wrong!")
+        // alert("Email is wrong!")
+        swal("Email is wrong!","","warning")
+
     }
     else {
       var getIt;
@@ -87,11 +91,11 @@ export class RegisterForm extends Component {
             this.users.child(idGenerate).set({
             ...this.state.form
              })
-        alert("User Registered Successfully")
+        swal("User Registered Successfully!","Go to Login Page ","success")
         this.reset()
       }
       else if(getIt==true){
-        alert("the email address you have entered is already registered")
+        swal("the email address you have entered is already registered!","Try another Email ","warning")
       }
     }  
   };       
@@ -112,7 +116,7 @@ export class RegisterForm extends Component {
     return (
       <div className="container d-flex justify-content-center align-items-center p-2">
         <form className="flex-column col-md-5 col-12 bg-light  border p-2 d-flex">
-          <h2 className="text-center text-danger">Register</h2>
+          <h2 className="text-center text-warning">Register</h2>
           <TextField
             className=" m-2"
             id="outlined-basic"

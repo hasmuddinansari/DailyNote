@@ -41,7 +41,7 @@
   background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
 }
 body{
-  background:lightyellow
+  background:lightyellow;
 }
 .bg-home {
   max-height:100vh;
@@ -50,4 +50,20 @@ body{
   font-size:30px;
   background-size: cover;
   background-attachment: fixed;
+}
+
+p {
+  font-family: 'Ma Shan Zheng', cursive;
+}
+h1, h2, h3, h4 {
+  font-family: 'Permanent Marker', cursive;
+
+}
+pre {
+  font-family: 'Sacramento', cursive;
+}
+.cycle-animate {
+  height:auto;
+  width: 4rem;
+  transform: rotateY(180deg);
 }

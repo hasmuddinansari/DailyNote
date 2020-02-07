@@ -6,6 +6,7 @@ import {connect} from "react-redux"
 import {changeEmail, setAuth} from "../../REDUX/Action"
 import {Link} from "react-router-dom"
 import {Route, Redirect} from "react-router-dom"
+import swal from 'sweetalert';
 
 export class Login extends Component {
   constructor(props) {
@@ -32,7 +33,8 @@ export class Login extends Component {
       e.preventDefault()
       const {email, password}= this.state
       if(email.length==0 || password.length==0){
-          alert("Email and Password are required to login")
+          // alert("Email and Password are required to login")
+          swal("Email and Password are required to login!", "Please re-type!", "warning");
       }
       else{
       this.users.orderByKey().on("value", snapshot=>{
@@ -43,7 +45,9 @@ export class Login extends Component {
           return this.state.email ===user.email
         })
         if(this.olderUser.length==0 || this.olderUser == undefined || this.olderUser==null){
-            alert("Either you are not registered ! Or Email or Password is wrong")
+            // alert("Either you are not registered ! Or Email or Password is wrong")
+          swal("Either you are not registered ! Or Email or Password is wrong!", "Please re-type!", "warning");
+
         }
         else if(this.olderUser[0].email==email && this.olderUser[0].password==password){
             this.props.setAuth(true, email)

@@ -5,6 +5,9 @@ import {Link } from 'react-router-dom'
 import 'firebase/database'
 import firebase from "firebase"
 import NotesCard from './NotesCard'
+import swal from "sweetalert"
+
+
 export class AllNotes extends Component {
     constructor(props){
         super(props)
@@ -25,10 +28,23 @@ export class AllNotes extends Component {
           })
     }
     deleteItem=(id)=>{
-        let confirmation = prompt(`Are you sure? \n if Yes then Type "1" \n and press "OK" \n cancel if you don't.`, "");
-        if (confirmation == 1) {
-        return this.rootRef.child(id).remove();
-        }
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this Note!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              this.rootRef.child(id).remove();
+              swal("Your note has been deleted!", {
+                icon: "success",
+              });
+            } else {
+              swal("Your note is safe!");
+            }
+          });
     }
     updateItem=(id,obj)=>{
         this.rootRef.child(id).update(obj)
