@@ -18,6 +18,7 @@ export class Dashboard extends Component {
             email:"",
             name:"",
             username:"",
+            isLoading:true,
         }
     }
     componentDidMount(){
@@ -59,6 +60,7 @@ export class Dashboard extends Component {
             this.setState({
                 ...this.state,
                 authenticated:this.props.auth.authenticated,
+                isLoading:false
             })
             
           
@@ -76,9 +78,15 @@ export class Dashboard extends Component {
             </div>
         }
         else {
-            return (
-                <RegisterForm/>
-            )
+            if(this.state.isLoading){
+                return <h4>Loding....</h4>
+            }
+            else{
+                return (
+                    <RegisterForm/>
+                )
+            }
+            
 
         }
        
