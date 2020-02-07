@@ -9,7 +9,7 @@ export default function NotesCard(props) {
     // console.log("match",match.match)
     return (
         <div className="col-sm-6 col-md-4  p-2">
-            <div className="card h-100 card-body bg-light shdw ">
+            <div className="card h-100 mycard card-body bg-light shdw ">
             <div className="row  justify-content-between">
             <h5 className="col-8 text-dark">{note.title}</h5>
             <span className="col-4 ">

@@ -64,7 +64,7 @@ pre {
 }
 .cycle-animate {
   height:auto;
-  animation: animateCycle 5s linear infinite;
+  animation: animateCycle 10s linear infinite;
   width: 4rem;
   transform: rotateY(180deg);
 }
@@ -74,6 +74,9 @@ pre {
   }
   to{
     transform: rotateY(180deg);
-    margin-left:30%;
+    margin-left:45%;
   }
+}
+.mycard:hover{
+  border:1px solid blue;
 }
