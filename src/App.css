@@ -64,6 +64,16 @@ pre {
 }
 .cycle-animate {
   height:auto;
+  animation: animateCycle 5s linear infinite;
   width: 4rem;
   transform: rotateY(180deg);
+}
+@keyframes animateCycle {
+  from {
+    margin-left:0%
+  }
+  to{
+    transform: rotateY(180deg);
+    margin-left:30%;
+  }
 }
