@@ -1,6 +1,0 @@
-[[redirects]]
-  from = "/create"
-  to = "/login"
-  status = 404
-  force = true
-  headers = {X-From = "Netlify"}
