@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Switch, Route} from "react-router-dom"
+import {HashRouter, Switch, Route} from "react-router-dom"
 import Create from "./components/Create/Create"
 import AllNotes from "./components/Notes/AllNotes"
 import Navbar from "./components/Navbar/Navbar"
@@ -12,7 +12,7 @@ import Dashboard from "./components/Dash/Dashboard"
 
 function App(props) {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Navbar/>
       <Switch>
       <Route path="/" exact component={Dashboard}/>  
@@ -23,7 +23,7 @@ function App(props) {
       <Route path="/signup" component={RegisterForm}/>
       <Route render={()=><h1>404 Not found</h1>}/> 
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
